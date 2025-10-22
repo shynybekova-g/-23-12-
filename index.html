@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <title>Ауа райы</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #74ABE2, #5563DE);
+            color: white;
+            text-align: center;
+            margin-top: 50px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input {
+            padding: 8px;
+            border: none;
+            border-radius: 4px;
+        }
+        button {
+            padding: 8px 12px;
+            border: none;
+            background-color: #2E47D3;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .weather-box {
+            background: rgba(255,255,255,0.1);
+            display: inline-block;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        img {
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <h1>🌤 Ауа райын тексеру</h1>
+    <form method="POST">
+    {% csrf_token %}
+    <input type="text" name="city" placeholder="City name">
+    <button type="submit">Get Weather</button>
+    </form>
+
+
+    {% if error %}
+        <p style="color: #ffcccc;">{{ error }}</p>
+    {% endif %}
+
+    {% if weather %}
+        <div class="weather-box">
+            <h2>{{ weather.city }}</h2>
+            <p>{{ weather.temperature }}°C</p>
+            <p>{{ weather.description }}</p>
+            <img src="{{ weather.icon }}" alt="icon">
+
+
+        </div>
+    {% endif %}
+</body>
+</html>
